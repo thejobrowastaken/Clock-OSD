@@ -1,20 +1,30 @@
 from tkinter import *
+from tkinter import colorchooser
 from time import strftime
 
+def settings():
+    settings = Tk()
+    settings.geometry('300x300')
+    settings.title('settings')
+
+    settings.columnconfigure((0,1,2,3,4), weight=2)
+    settings.rowconfigure((1,2,3,4), weight=2)
+
+    def colourcmd():
+        colour = colorchooser.askcolor()
+        colour = colour[1]
+        print(colour)
+    settings.config(bg="#8db3f0")
+
+    lb = Label(settings, bg="#8db3f0", fg="white", font=("Arial", 25, "bold"), text="Settings")
+    colourpick = Button(settings,bg='#8db3f0', fg="white", command=colourcmd, text="Colour")
+    lb.grid(row=0, column=2, sticky="w")
+    colourpick.grid(row=1, column=0, columnspan=1, sticky="ew", padx=10)
+    
+    settings.mainloop()
 def killer():
     quit()
-
-menu = Tk()
-menu.config(bg="#8db3f0")
-a = "Clock"
-menu.title(a)
-x_screenreso = menu.winfo_screenmmwidth()
-y_screenreso = menu.winfo_screenmmheight()
-xreso = x_screenreso/2 + 565
-yreso = y_screenreso/2 + 100
-menu.geometry(f"200x400+{int(xreso)}+{int(yreso)}")
-
-def DigitalClock():
+def DigitalClock(): 
     root = Tk()
     x_screenreso = root.winfo_screenmmwidth()
     y_screenreso = root.winfo_screenmmheight()
@@ -30,19 +40,28 @@ def DigitalClock():
         a = strftime('%H:%M:%S')
         lb.config(text=a)
         lb.after(1000,clocktime)
-    lb = Label(root, width=25, height=1, bg='black', fg="cyan", font=("Arial", 35, 'bold'))
-    lb.pack()
+    lb26 = Label(root, width=25, height=1, bg='black', fg="cyan", font=("Arial", 35, 'bold'))
+    lb26.pack()
     clocktime()
     root.mainloop()
 
-    
-    
 
+
+
+menu = Tk()
+menu.config(bg="#8db3f0")
+a = "Clock"
+menu.title(a)
+x_screenreso = menu.winfo_screenmmwidth()
+y_screenreso = menu.winfo_screenmmheight()
+xreso = x_screenreso/2 + 565
+yreso = y_screenreso/2 + 100
+menu.geometry(f"200x400+{int(xreso)}+{int(yreso)}")
 
 menu.rowconfigure((0,1,2,3,4), weight=2)
 menu.columnconfigure((0,1,2), weight=2)
 lb = Label(menu, text="Da Menu", fg="white", bg="#8db3f0", font=("Arial", 25, "bold"))
-settingbtn = Button(menu, text="Settings", fg="white", bg="#8db3f0",font=("Arial", 25, "bold"))
+settingbtn = Button(menu, text="Settings", fg="white", bg="#8db3f0",font=("Arial", 25, "bold"), command=settings)
 clockbtn = Button(menu, text="  Clock  ", fg="white", bg="#8db3f0",font=("Arial", 25, "bold"), command=DigitalClock)
 quitbtn = Button(menu, text="quit", fg="white", bg="#8db3f0",font=("Arial", 25, "bold"), command=killer)
 note = Label(menu, text="Note:only clock works for now", fg="white", bg="#8db3f0",font=("Arial", 10, "italic"))
