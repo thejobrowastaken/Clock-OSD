@@ -44,6 +44,7 @@ def DigitalClock():
     def clocktime():
         a = strftime('%H:%M:%S')
         lb.config(text=a)
+        lb.config(fg=holdmybeer)
         lb.after(1000,clocktime)
     lb = Label(root, width=25, height=1, bg='black', fg=holdmybeer, font=("Arial", 35, 'bold'))
     lb.pack()
