@@ -13,17 +13,22 @@ def settings():
     def colourcmd():
         colour = colorchooser.askcolor()
         colour = colour[1]
-        print(colour)
+        global holdmybeer
+        holdmybeer = colour
     settings.config(bg="#8db3f0")
-
     lb = Label(settings, bg="#8db3f0", fg="white", font=("Arial", 25, "bold"), text="Settings")
     colourpick = Button(settings,bg='#8db3f0', fg="white", command=colourcmd, text="Colour")
     lb.grid(row=0, column=2, sticky="w")
     colourpick.grid(row=1, column=0, columnspan=1, sticky="ew", padx=10)
     
     settings.mainloop()
+
+holdmybeer = '#8db3f0'
+
 def killer():
     quit()
+
+
 def DigitalClock(): 
     root = Tk()
     x_screenreso = root.winfo_screenmmwidth()
@@ -40,8 +45,8 @@ def DigitalClock():
         a = strftime('%H:%M:%S')
         lb.config(text=a)
         lb.after(1000,clocktime)
-    lb26 = Label(root, width=25, height=1, bg='black', fg="cyan", font=("Arial", 35, 'bold'))
-    lb26.pack()
+    lb = Label(root, width=25, height=1, bg='black', fg=holdmybeer, font=("Arial", 35, 'bold'))
+    lb.pack()
     clocktime()
     root.mainloop()
 
