@@ -15,6 +15,7 @@ Common_Font = ("Arial", 15, "bold")
 scaleheight = 35
 colourpickervalue = '#8db3f0'
 clocklabelwidth = 25
+TimeType = "%H:%M:%S"
 
 
 Root = Tk()
@@ -82,6 +83,19 @@ def Settings():
     
     fontscale.config(command=updatescale)
 
+    #Radiobuttons for 12h and 24h
+    Pilotttime = Radiobutton(Root, text="24Hour format", value=24,bg=bgColour, command=pilottime)
+    Commontime = Radiobutton(Root, text="12Hour format", value=12, bg=bgColour, command=commontime)
+    Pilotttime.grid(row=2, column=2, sticky="news",pady=10)
+    Commontime.grid(row=2, column=2, sticky="sew", pady=10)
+
+def pilottime():
+    global TimeType
+    TimeType = "%H:%M:%S"
+def commontime():
+    global TimeType
+    TimeType = "%I:%M:%S %p"
+
 def RestoreMainMenu():
     # Remove settings widgets
     fontscale.grid_remove()
@@ -111,7 +125,7 @@ def DigitalClock():
     root.wm_attributes('-transparent', 'black')
     root.wm_overrideredirect(1)
     def clocktime():
-        a = strftime('%H:%M:%S')
+        a = strftime(TimeType)
         lb.config(text=a, fg=colourpickervalue, font=("Arial", int(scaleheight), "bold"))
         lb.after(1000,clocktime)
     global lb
