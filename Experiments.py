@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import colorchooser
+import tkinter
 from time import strftime, sleep
 
 #Items requiring outside of mainloop
@@ -13,6 +14,7 @@ Font_Of_Title = ("Arial", 20, "bold")
 Common_Font = ("Arial", 15, "bold")
 scaleheight = 35
 colourpickervalue = '#8db3f0'
+clocklabelwidth = 25
 
 
 Root = Tk()
@@ -37,8 +39,10 @@ def Settings():  #I dont know what im doing but i know itll work barely
     fontlabel = Label(Root, text="fontscale", bg=bgColour, font=("Arial", 10, "bold"), fg=fgColour)
     fontlabel.grid(row=2, column=1, sticky="wn")
     def updatescale(val):
+        global clocklabelwidth
         global scaleheight
         scaleheight = int(float(val))
+        clocklabelwidth = scaleheight + clocklabelwidth
     fontscale.config(command=updatescale)
     fontscale.grid(row=2, column=1, sticky="w")
     Customize.destroy()
@@ -62,11 +66,9 @@ def DigitalClock():
         lb.config(text=a, fg=colourpickervalue, font=("Arial", int(scaleheight), "bold"))
         lb.after(1000,clocktime)
     global lb
-    lb = Label(root, width=25, height=1, bg='black', fg='#8db3f0', font=("Arial", 35, 'bold'))
+    lb = Label(root, width=clocklabelwidth, height=1, bg='black', fg='#8db3f0', font=("Arial", 35, 'bold'))
     lb.pack()
     clocktime()
-    root.mainloop()
-    
 
 
 
