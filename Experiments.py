@@ -92,30 +92,33 @@ def RestoreMainMenu():
     Customize.grid()
     quitbtn.grid()
 
-
-
-    
-def DigitalClock(): 
-    root = Toplevel()  # Changed from Tk() to Toplevel()
-    x_screenreso = root.winfo_screenmmwidth()  # Changed from root to Root
-    y_screenreso = root.winfo_screenmmheight()  # Changed from root to Root
-    root.resizable(False,False)
-    root.config(bg='black')
+def Digitalclock():
+    global Clockroot
+    Clockroot = Toplevel()  # Changed from Tk() to Toplevel()
+    x_screenreso = Clockroot.winfo_screenmmwidth()  # Changed from root to Root
+    y_screenreso = Clockroot.winfo_screenmmheight()  # Changed from root to Root
+    Clockroot.resizable(False,False)
+    Clockroot.config(bg='black')
     xresoclock = x_screenreso/2 + 1360
     yresoclock = y_screenreso/2 - 150
-    root.geometry(f"320x100+{int(xresoclock)}+{int(yresoclock)}")
-    root.attributes('-topmost', True)
-    root.wm_attributes('-transparent', 'black')
-    root.wm_overrideredirect(1)
+    Clockroot.geometry(f"320x100+{int(xresoclock)}+{int(yresoclock)}")
+    Clockroot.attributes('-topmost', True)
+    Clockroot.wm_attributes('-transparent', 'black')
+    Clockroot.wm_overrideredirect(1)
     def clocktime():
         a = strftime(TimeType)
         lb.config(text=a, fg=colourpickervalue, font=("Arial", int(scaleheight), "bold"))
         lb.after(1000,clocktime)
     global lb
-    lb = Label(root, width=clocklabelwidth, height=1, bg='black', fg='#8db3f0', font=("Arial", 35, 'bold'))
+    lb = Label(Clockroot, width=clocklabelwidth, height=1, bg='black', fg='#8db3f0', font=("Arial", 35, 'bold'))
     lb.pack()
     clocktime()
+    Clock.config(command=ClockKiller)
 
+def ClockKiller():
+    Clockroot.destroy()
+    Clock.config(command=Digitalclock)
+    
 
 
 
@@ -126,7 +129,7 @@ Root.columnconfigure((0,1,2,3), weight=2)
 
 #Titles
 Title = Label(Root, text="ClockMenu", bg=bgColour, font=("Arial", 20, "bold"), fg=fgColour)
-Clock = Button(Root, text="Clock", bg=bgColour, font=Common_Font, fg=fgColour, command=DigitalClock)
+Clock = Button(Root, text="Clock", bg=bgColour, font=Common_Font, fg=fgColour, command=Digitalclock)
 Customize = Button(Root, text="Customization", bg=bgColour, font=Common_Font, fg=fgColour, command=Settings)
 quitbtn = Button(Root, text="Quit", bg=bgColour, font=Common_Font, fg=fgColour, command=kill)
 
