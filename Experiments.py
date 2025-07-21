@@ -27,14 +27,16 @@ def ColourSelecter():
     colourpickervalue = colourpickervalue[1] #Always put [1] as it signifys the colour to be in hexadecimal form!!
 
 def Settings():         #I dont know what im doing but i know itll work barely
-    global fontscale
     Title.config(text="Setup")
     Clock.config(text="Colour Picker", command=ColourSelecter)
     fontscale = Scale(Root,from_=1, to=30, orient="horizontal", bg=bgColour, fg=fgColour)
+    global scaleheight
+    scaleheight = fontscale.get()
     fontlabel = Label(Root, text="fontscale", bg=bgColour, font=("Arial", 10, "bold"), fg=fgColour)
     fontlabel.grid(row=2, column=1, sticky="wn")
     fontscale.grid(row=2, column=1, sticky="w")
     Customize.destroy()
+
 
     
 def DigitalClock(): 
@@ -51,7 +53,7 @@ def DigitalClock():
     root.wm_overrideredirect(1)
     def clocktime():
         a = strftime('%H:%M:%S')
-        lb.config(text=a, fg=colourpickervalue, font=("Arial", 35, "bold"))
+        lb.config(text=a, fg=colourpickervalue, font=("Arial", int(scaleheight), "bold"))
         lb.after(1000,clocktime)
     global lb
     lb = Label(root, width=25, height=1, bg='black', fg='#8db3f0', font=("Arial", 35, 'bold'))
