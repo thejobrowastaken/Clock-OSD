@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import colorchooser
 from time import strftime, sleep
+#Globals
+global scaleheight
 
 #Items requiring outside of mainloop
 def kill():
@@ -21,16 +23,18 @@ Root.config(bg=bgColour)
 
 #Func storage
 colourpickervalue = '#8db3f0'
+global scaleheight
 def ColourSelecter():
     global colourpickervalue
     colourpickervalue = colorchooser.askcolor()
     colourpickervalue = colourpickervalue[1] #Always put [1] as it signifys the colour to be in hexadecimal form!!
 
-def Settings():         #I dont know what im doing but i know itll work barely
+def Settings():  #I dont know what im doing but i know itll work barely
+    global scaleheight       
     Title.config(text="Setup")
     Clock.config(text="Colour Picker", command=ColourSelecter)
     fontscale = Scale(Root,from_=1, to=30, orient="horizontal", bg=bgColour, fg=fgColour)
-    global scaleheight
+    fontscale.set(15)
     scaleheight = fontscale.get()
     fontlabel = Label(Root, text="fontscale", bg=bgColour, font=("Arial", 10, "bold"), fg=fgColour)
     fontlabel.grid(row=2, column=1, sticky="wn")
@@ -40,6 +44,7 @@ def Settings():         #I dont know what im doing but i know itll work barely
 
     
 def DigitalClock(): 
+    global scaleheight
     root = Tk()
     x_screenreso = root.winfo_screenmmwidth()
     y_screenreso = root.winfo_screenmmheight()
@@ -52,10 +57,10 @@ def DigitalClock():
     root.wm_attributes('-transparent', 'black')
     root.wm_overrideredirect(1)
     def clocktime():
+        global scaleheight
         a = strftime('%H:%M:%S')
-        lb.config(text=a, fg=colourpickervalue, font=("Arial", int(scaleheight), "bold"))
+        lb.config(text=a, fg=colourpickervalue, font=("Arial", scaleheight, "bold"))
         lb.after(1000,clocktime)
-    global lb
     lb = Label(root, width=25, height=1, bg='black', fg='#8db3f0', font=("Arial", 35, 'bold'))
     lb.pack()
     clocktime()
