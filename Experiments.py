@@ -113,11 +113,12 @@ def Digitalclock():
     lb = Label(Clockroot, width=clocklabelwidth, height=1, bg='black', fg='#8db3f0', font=("Arial", 35, 'bold'))
     lb.pack()
     clocktime()
-    Clock.config(command=ClockKiller)
+    Clock.config(command=ClockKiller) #Sets the command to the other function
 
+#This will toggle the clock off
 def ClockKiller():
     Clockroot.destroy()
-    Clock.config(command=Digitalclock)
+    Clock.config(command=Digitalclock) #Vice Versa the command
     
 
 
