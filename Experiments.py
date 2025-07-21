@@ -30,27 +30,6 @@ def ColourSelecter():
     colourpickervalue = colorchooser.askcolor()
     colourpickervalue = colourpickervalue[1] #Always put [1] as it signifys the colour to be in hexadecimal form!!
 
-def Settings():  #I dont know what im doing but i know itll work barely
-    global scaleheight       
-    Title.config(text="Setup")
-    Clock.config(text="Colour Picker", command=ColourSelecter)
-    fontscale = Scale(Root,from_=1, to=150, orient="horizontal", bg=bgColour, fg=fgColour)
-    fontscale.set(scaleheight)
-    scaleheight = fontscale.get()
-    fontlabel = Label(Root, text="fontscale", bg=bgColour, font=("Arial", 10, "bold"), fg=fgColour)
-    fontlabel.grid(row=2, column=1, sticky="wn")
-    def updatescale(val):
-        global clocklabelwidth
-        global scaleheight
-        scaleheight = int(float(val))
-        clocklabelwidth = scaleheight + clocklabelwidth
-    fontscale.config(command=updatescale)
-    fontscale.grid(row=2, column=1, sticky="w")
-    Customize.destroy()
-
-
-### COMMENT THE ABOVE SETTINGS FUNCTION AND USE THE BELOW
-
 def Settings():
     global scaleheight, fontscale, fontlabel, back_button, colour_picker_btn
     
