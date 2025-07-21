@@ -31,7 +31,7 @@ def ColourSelecter():
     colourpickervalue = colourpickervalue[1] #Always put [1] as it signifys the colour to be in hexadecimal form!!
 
 def Settings():
-    global scaleheight, fontscale, fontlabel, back_button, colour_picker_btn
+    global scaleheight, fontscale, fontlabel, back_button, colour_picker_btn, Pilotttime, Commontime
     
     # Hide original buttons
     Clock.grid_remove()
@@ -81,6 +81,9 @@ def RestoreMainMenu():
     fontlabel.grid_remove()
     back_button.grid_remove()
     colour_picker_btn.grid_remove()
+    Pilotttime.grid_remove()
+    Commontime.grid_remove()
+    
     
     # Restore original buttons
     Title.config(text="ClockMenu")
