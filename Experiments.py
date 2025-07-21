@@ -99,9 +99,9 @@ def Digitalclock():
     y_screenreso = Clockroot.winfo_screenmmheight()  # Changed from root to Root
     Clockroot.resizable(False,False)
     Clockroot.config(bg='black')
-    xresoclock = x_screenreso/2 + 1360
-    yresoclock = y_screenreso/2 - 150
-    Clockroot.geometry(f"320x100+{int(xresoclock)}+{int(yresoclock)}")
+    xresoclock = x_screenreso/2
+    yresoclock = y_screenreso/2
+    Clockroot.geometry(f"+{int(xresoclock)}+{int(yresoclock)}")
     Clockroot.attributes('-topmost', True)
     Clockroot.wm_attributes('-transparent', 'black')
     Clockroot.wm_overrideredirect(1)
