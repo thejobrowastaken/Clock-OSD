@@ -16,6 +16,7 @@ scaleheight = 35
 colourpickervalue = '#8db3f0'
 clocklabelwidth = 25
 TimeType = "%H:%M:%S"
+SelectedRadioButton = 24
 
 
 Root = Tk()
@@ -63,8 +64,8 @@ def Settings():
     fontscale.config(command=updatescale)
 
     #Radiobuttons for 12h and 24h
-    Pilotttime = Radiobutton(Root, text="24Hour format", value=24,bg=bgColour, command=pilottime)
-    Commontime = Radiobutton(Root, text="12Hour format", value=12, bg=bgColour, command=commontime)
+    Pilotttime = Radiobutton(Root, text="24Hour format", value=24,variable=SelectedRadioButton, bg=bgColour, command=pilottime)
+    Commontime = Radiobutton(Root, text="12Hour format", value=12,variable=SelectedRadioButton, bg=bgColour, command=commontime)
     Pilotttime.grid(row=2, column=2, sticky="news",pady=10)
     Commontime.grid(row=2, column=2, sticky="sew", pady=10)
 
