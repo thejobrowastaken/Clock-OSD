@@ -1,6 +1,5 @@
 from tkinter import *
-from tkinter import colorchooser
-import tkinter
+from tkinter import colorchooser, font
 from time import strftime, sleep
 
 #Items requiring outside of mainloop
@@ -18,6 +17,9 @@ clocklabelwidth = 25
 TimeType = "%H:%M:%S"
 SelectedRadioButton = 24
 
+
+
+#The Great List Of Fonts
 
 Root = Tk()
 Root.geometry('400x400')
@@ -76,6 +78,14 @@ def commontime():
     global TimeType
     TimeType = "%I:%M:%S %p"
 
+    #Listbox Creation
+    ListOfFonts = font.families(Root)
+    FontList = Listbox(Root, )
+    for item in ListOfFonts :
+        FontList.insert(END, item)
+    FontList.grid(row=1, column=4, sticky="news", pady=10)
+
+
 def RestoreMainMenu():
     # Remove settings widgets
     fontscale.grid_remove()
@@ -99,16 +109,20 @@ def Digitalclock():
     #Getting widths and heights
     x_screenreso = Clockroot.winfo_screenmmwidth()  # Changed from root to Root
     y_screenreso = Clockroot.winfo_screenmmheight()  # Changed from root to Root
-    window_x = Root.winfo_width()
-    window_y = Clock.winfo_height()
+    window_x = Clockroot.winfo_width()
+    window_y = Clockroot.winfo_height()
+    errorx = 60
+    errory = 30
+    print(window_x, window_y)
 
 
     Clockroot.resizable(False,False)
     Clockroot.config(bg='black') 
 
     #Position Calculation
-    xresoclock = x_screenreso/2 + window_x/2
-    yresoclock = y_screenreso/2 + window_y/2
+    xresoclock = (int(x_screenreso / 2)) + int(window_x / 2 )
+    yresoclock = (int(y_screenreso / 2)) + int(window_y / 2 )
+
 
     #Position Placement
     Clockroot.geometry(f"+{int(xresoclock)}+{int(yresoclock)}")
@@ -128,6 +142,8 @@ def Digitalclock():
     lb.pack()
     clocktime()
     Clock.config(command=ClockKiller) #Sets the command to the other function
+    Clockroot.update()
+
 
 #This will toggle the clock off
 def ClockKiller():
@@ -152,4 +168,5 @@ Title.grid(row=0, column=1, columnspan=2, sticky="wne", pady=20)
 Clock.grid(row=1, column=1, columnspan=2, sticky='wne')
 Customize.grid(row=2, column=1, columnspan=2, sticky='wne')
 quitbtn.grid(row=3, column=1, columnspan=2, sticky='wne')
+
 Root.mainloop()
