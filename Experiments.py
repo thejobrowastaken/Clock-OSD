@@ -48,6 +48,55 @@ def Settings():  #I dont know what im doing but i know itll work barely
     Customize.destroy()
 
 
+### COMMENT THE ABOVE SETTINGS FUNCTION AND USE THE BELOW
+
+def Settings():
+    global scaleheight, fontscale, fontlabel, back_button, colour_picker_btn
+    
+    # Hide original buttons
+    Clock.grid_remove()
+    Customize.grid_remove()
+    quitbtn.grid_remove()
+    
+    Title.config(text="Setup")
+    
+    # Create Back button
+    back_button = Button(Root, text="Back", bg=bgColour, font=Common_Font, fg=fgColour, command=RestoreMainMenu)
+    back_button.grid(row=3, column=1, columnspan=2, sticky='wne')
+    
+    # Colour Picker Button
+    colour_picker_btn = Button(Root, text="Colour Picker", bg=bgColour, font=Common_Font, fg=fgColour, command=ColourSelecter)
+    colour_picker_btn.grid(row=1, column=1, columnspan=2, sticky='wne')
+    
+    # Font Scale Slider
+    fontlabel = Label(Root, text="Font Scale", bg=bgColour, font=("Arial", 10, "bold"), fg=fgColour)
+    fontlabel.grid(row=2, column=1, sticky="wn")
+    
+    fontscale = Scale(Root, from_=1, to=150, orient="horizontal", bg=bgColour, fg=fgColour)
+    fontscale.set(scaleheight)
+    fontscale.grid(row=2, column=1, sticky="w")
+    
+    def updatescale(val):
+        global scaleheight
+        scaleheight = int(float(val))
+    
+    fontscale.config(command=updatescale)
+
+def RestoreMainMenu():
+    # Remove settings widgets
+    fontscale.grid_remove()
+    fontlabel.grid_remove()
+    back_button.grid_remove()
+    colour_picker_btn.grid_remove()
+    
+    # Restore original buttons
+    Title.config(text="ClockMenu")
+    Clock.grid()
+    Customize.grid()
+    quitbtn.grid()
+
+
+
     
 def DigitalClock(): 
     root = Toplevel()  # Changed from Tk() to Toplevel()
