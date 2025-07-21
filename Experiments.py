@@ -107,8 +107,8 @@ def Digitalclock():
     Clockroot.config(bg='black') 
 
     #Position Calculation
-    xresoclock = x_screenreso/2 + window_x
-    yresoclock = y_screenreso/2 + window_y
+    xresoclock = x_screenreso/2 + window_x/2
+    yresoclock = y_screenreso/2 + window_y/2
 
     #Position Placement
     Clockroot.geometry(f"+{int(xresoclock)}+{int(yresoclock)}")
@@ -122,7 +122,7 @@ def Digitalclock():
         lb.config(text=a, fg=colourpickervalue, font=("Arial", int(scaleheight), "bold"))
         lb.after(1000,clocktime)
 
-    #God knows what all of this is
+    #God knows what All of this is
     global lb
     lb = Label(Clockroot, width=clocklabelwidth, height=1, bg='black', fg='#8db3f0', font=("Arial", 35, 'bold'))
     lb.pack()
