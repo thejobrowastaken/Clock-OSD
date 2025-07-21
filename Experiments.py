@@ -1,8 +1,6 @@
 from tkinter import *
 from tkinter import colorchooser
 from time import strftime, sleep
-#Globals
-global scaleheight
 
 #Items requiring outside of mainloop
 def kill():
@@ -13,6 +11,8 @@ bgColour='#b0c3e8'
 fgColour = '#020c21'
 Font_Of_Title = ("Arial", 20, "bold")
 Common_Font = ("Arial", 15, "bold")
+scaleheight = 35
+colourpickervalue = '#8db3f0'
 
 
 Root = Tk()
@@ -22,8 +22,6 @@ Root.config(bg=bgColour)
 #Root Info
 
 #Func storage
-colourpickervalue = '#8db3f0'
-global scaleheight
 def ColourSelecter():
     global colourpickervalue
     colourpickervalue = colorchooser.askcolor()
@@ -33,34 +31,37 @@ def Settings():  #I dont know what im doing but i know itll work barely
     global scaleheight       
     Title.config(text="Setup")
     Clock.config(text="Colour Picker", command=ColourSelecter)
-    fontscale = Scale(Root,from_=1, to=30, orient="horizontal", bg=bgColour, fg=fgColour)
-    fontscale.set(15)
+    fontscale = Scale(Root,from_=1, to=150, orient="horizontal", bg=bgColour, fg=fgColour)
+    fontscale.set(scaleheight)
     scaleheight = fontscale.get()
     fontlabel = Label(Root, text="fontscale", bg=bgColour, font=("Arial", 10, "bold"), fg=fgColour)
     fontlabel.grid(row=2, column=1, sticky="wn")
+    def updatescale(val):
+        global scaleheight
+        scaleheight = int(float(val))
+    fontscale.config(command=updatescale)
     fontscale.grid(row=2, column=1, sticky="w")
     Customize.destroy()
 
 
     
 def DigitalClock(): 
-    global scaleheight
-    root = Tk()
-    x_screenreso = root.winfo_screenmmwidth()
-    y_screenreso = root.winfo_screenmmheight()
+    root = Toplevel()  # Changed from Tk() to Toplevel()
+    x_screenreso = root.winfo_screenmmwidth()  # Changed from root to Root
+    y_screenreso = root.winfo_screenmmheight()  # Changed from root to Root
     root.resizable(False,False)
     root.config(bg='black')
-    xresoclock = x_screenreso/2 + 1360  
+    xresoclock = x_screenreso/2 + 1360
     yresoclock = y_screenreso/2 - 150
     root.geometry(f"320x100+{int(xresoclock)}+{int(yresoclock)}")
     root.attributes('-topmost', True)
     root.wm_attributes('-transparent', 'black')
     root.wm_overrideredirect(1)
     def clocktime():
-        global scaleheight
         a = strftime('%H:%M:%S')
-        lb.config(text=a, fg=colourpickervalue, font=("Arial", scaleheight, "bold"))
+        lb.config(text=a, fg=colourpickervalue, font=("Arial", int(scaleheight), "bold"))
         lb.after(1000,clocktime)
+    global lb
     lb = Label(root, width=25, height=1, bg='black', fg='#8db3f0', font=("Arial", 35, 'bold'))
     lb.pack()
     clocktime()
