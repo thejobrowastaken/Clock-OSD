@@ -95,20 +95,34 @@ def RestoreMainMenu():
 def Digitalclock():
     global Clockroot
     Clockroot = Toplevel()  # Changed from Tk() to Toplevel()
+
+    #Getting widths and heights
     x_screenreso = Clockroot.winfo_screenmmwidth()  # Changed from root to Root
     y_screenreso = Clockroot.winfo_screenmmheight()  # Changed from root to Root
+    window_x = Root.winfo_width()
+    window_y = Clock.winfo_height()
+
+
     Clockroot.resizable(False,False)
-    Clockroot.config(bg='black')
-    xresoclock = x_screenreso/2
-    yresoclock = y_screenreso/2
+    Clockroot.config(bg='black') 
+
+    #Position Calculation
+    xresoclock = x_screenreso/2 + window_x
+    yresoclock = y_screenreso/2 + window_y
+
+    #Position Placement
     Clockroot.geometry(f"+{int(xresoclock)}+{int(yresoclock)}")
     Clockroot.attributes('-topmost', True)
     Clockroot.wm_attributes('-transparent', 'black')
     Clockroot.wm_overrideredirect(1)
+
+    #Time Getter Function
     def clocktime():
         a = strftime(TimeType)
         lb.config(text=a, fg=colourpickervalue, font=("Arial", int(scaleheight), "bold"))
         lb.after(1000,clocktime)
+
+    #God knows what all of this is
     global lb
     lb = Label(Clockroot, width=clocklabelwidth, height=1, bg='black', fg='#8db3f0', font=("Arial", 35, 'bold'))
     lb.pack()
