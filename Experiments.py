@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import colorchooser, font
+from tkinter.ttk import Combobox
 from time import strftime, sleep
 
 #Items requiring outside of mainloop
@@ -8,6 +9,7 @@ def kill():
 
 #Variables 
 bgColour='#b0c3e8'
+DrkBgColour = '#b1c2e3'
 fgColour = '#020c21'
 Font_Of_Title = ("Arial", 20, "bold")
 Common_Font = ("Arial", 15, "bold")
@@ -19,9 +21,15 @@ SelectedRadioButton = 24
 
 
 
-#The Great List Of Fonts
 
+#The Great List Of Fonts
 Root = Tk()
+
+#Variables Requiring a dependant Root
+SelectedFontValue = StringVar(Root) #Stores the combobox of fonts value in a string variable!
+
+
+
 Root.geometry('400x400')
 Root.title("Clock V2")
 Root.config(bg=bgColour)
@@ -33,8 +41,17 @@ def ColourSelecter():
     colourpickervalue = colorchooser.askcolor()
     colourpickervalue = colourpickervalue[1] #Always put [1] as it signifys the colour to be in hexadecimal form!!
 
+#RadioButtons Functions. pls dont touch if it works
+def pilottime():
+            global TimeType
+            TimeType = "%H:%M:%S"
+def commontime():
+            global TimeType
+            TimeType = "%I:%M:%S %p"
+
+
 def Settings():
-    global scaleheight, fontscale, fontlabel, back_button, colour_picker_btn, Pilotttime, Commontime
+    global scaleheight, fontscale, fontlabel, back_button, colour_picker_btn, Pilotttime, Commontime, FontList
     
     # Hide original buttons
     Clock.grid_remove()
@@ -71,19 +88,12 @@ def Settings():
     Pilotttime.grid(row=2, column=2, sticky="news",pady=10)
     Commontime.grid(row=2, column=2, sticky="sew", pady=10)
 
-def pilottime():
-    global TimeType
-    TimeType = "%H:%M:%S"
-def commontime():
-    global TimeType
-    TimeType = "%I:%M:%S %p"
 
+    
     #Listbox Creation
-    ListOfFonts = font.families(Root)
-    FontList = Listbox(Root, )
-    for item in ListOfFonts :
-        FontList.insert(END, item)
-    FontList.grid(row=1, column=4, sticky="news", pady=10)
+    ListOfFonts = font.families()
+    FontList = Combobox(Root, values=ListOfFonts, background=DrkBgColour)
+    FontList.grid(row=1, column=2, sticky="s")
 
 
 def RestoreMainMenu():
@@ -94,7 +104,8 @@ def RestoreMainMenu():
     colour_picker_btn.grid_remove()
     Pilotttime.grid_remove()
     Commontime.grid_remove()
-    
+    FontList.grid_remove()
+
     
     # Restore original buttons
     Title.config(text="ClockMenu")
@@ -133,7 +144,7 @@ def Digitalclock():
     #Time Getter Function
     def clocktime():
         a = strftime(TimeType)
-        lb.config(text=a, fg=colourpickervalue, font=("Arial", int(scaleheight), "bold"))
+        lb.config(text=a, fg=colourpickervalue, font=(f'{FontList.get()}', int(scaleheight), "bold"))
         lb.after(1000,clocktime)
 
     #God knows what All of this is
