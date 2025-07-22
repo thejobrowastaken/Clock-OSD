@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import colorchooser, font
+from tkinter import colorchooser, font, Canvas
 from tkinter.ttk import Combobox
 from time import strftime, sleep
 
@@ -93,8 +93,11 @@ def Settings():
     #Listbox Creation
     ListOfFonts = font.families()
     FontList = Combobox(Root, values=ListOfFonts, background=DrkBgColour)
+    FontList.current(11)
     FontList.grid(row=1, column=2, sticky="s")
 
+#False Holders Of A value so i dont need to run settings function to use font
+FontList = StringVar(Root, value="Arial")
 
 def RestoreMainMenu():
     # Remove settings widgets
