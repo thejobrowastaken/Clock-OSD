@@ -42,16 +42,17 @@ def SideMenu():
 
 #Elements
 Titlefont = CTkFont(weight="bold", slant="italic", size=65, family="Lexend")
+ParaFont = CTkFont(size=1, family="Lexend")
 TitlePhysic = CTkLabel(root, text="PHYSICS", font=Titlefont, bg_color=Bg, text_color=Fg, width=20, padx=-100)
 TitleWallah = CTkLabel(root, text="WALLAH", font=Titlefont, bg_color=Bg, text_color=Fg, width=20,padx=100)
-Paragraphone = CTkLabel(root, text=ParagraphA, font=Titlefont, justify="center")
+Paragraphone = CTkLabel(root, text=ParagraphA, font=Titlefont)
 SideBarBtn = CTkButton(root,image=tkimage, fg_color=Bg, font=("Lexend", 10, "bold"), height=1, width=1, text="", command=SideMenu)
 Sidebar = CTkLabel(root, text="", bg_color=DarkerBg, corner_radius=30)
 PwBatches = CTkButton(root, text="Batches", fg_color=ButtonColour)
 PwNotes = CTkButton(root, text="Batches", fg_color=ButtonColour)
 PwLectures = CTkButton(root, text="Lectures", fg_color=ButtonColour)
 PwLinks = CTkButton(root, text="GroupLinks", fg_color=ButtonColour)
-SideMenuThingy = CTkLabel(root, text="Options", font=Titlefont, bg_color=Bg, text_color=Fg)
+SideMenuThingy = CTkLabel(root, text="Options", font=Titlefont, bg_color="#FD6DEE", text_color='#FD6DEE')
 
 
 #GriddingElementos
